@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedTeam CHAT v1.0 - Command & Control</title>
+    <link rel="stylesheet" href="./static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="index.html" class="active">[ DASHBOARD ]</a>
+            <a href="logs.html">[ LOGS ]</a>
+            <a href="settings.html">[ SETTINGS ]</a>
+            <div class="status-badge">
+                <span class="dot"></span>
+                <span id="connectionStatus">CONNECTED TO C2</span>
+            </div>
+        </nav>
+
+        <!-- Header -->
+        <h1>REDTEAM CHAT v1.0</h1>
+        <div class="subtitle">
+            [*] SECURE TCP CHAT SERVER FOR RED TEAM OPERATIONS
+            <span class="terminal-cursor"></span>
+        </div>
+
+        <!-- Server Control Cards -->
+        <div class="server-grid">
+            <!-- TCP Server Card -->
+            <div class="server-card" id="tcpCard">
+                <div class="server-header">
+                    <div class="server-icon">🔴</div>
+                    <div class="server-title">
+                        <h3>TCP LISTENER</h3>
+                        <h2>PORT 4444</h2>
+                    </div>
+                </div>
+
+                <div class="server-controls">
+                    <button class="btn btn-primary" onclick="startTCPServer()" id="tcpStartBtn">START</button>
+                    <button class="btn btn-secondary" onclick="stopTCPServer()" id="tcpStopBtn" disabled>STOP</button>
+                </div>
+
+                <div class="server-stats">
+                    <div class="stat-row">
+                        <span class="stat-label">Status:</span>
+                        <span class="stat-value" id="tcpStatus">OFFLINE</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Connections:</span>
+                        <span class="stat-value" id="tcpConnections">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Messages:</span>
+                        <span class="stat-value" id="tcpMessages">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UDP Server Card -->
+            <div class="server-card" id="udpCard">
+                <div class="server-header">
+                    <div class="server-icon">🟡</div>
+                    <div class="server-title">
+                        <h3>UDP LISTENER</h3>
+                        <h2>PORT 4445</h2>
+                    </div>
+                </div>
+
+                <div class="server-controls">
+                    <button class="btn btn-primary" onclick="startUDPServer()" id="udpStartBtn">START</button>
+                    <button class="btn btn-secondary" onclick="stopUDPServer()" id="udpStopBtn" disabled>STOP</button>
+                </div>
+
+                <div class="server-stats">
+                    <div class="stat-row">
+                        <span class="stat-label">Status:</span>
+                        <span class="stat-value" id="udpStatus">OFFLINE</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Connections:</span>
+                        <span class="stat-value" id="udpConnections">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Messages:</span>
+                        <span class="stat-value" id="udpMessages">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Connected Clients Panel -->
+        <div class="clients-panel">
+            <div class="clients-header">
+                <h3>🔴 ACTIVE CLIENTS</h3>
+                <span class="clients-count" id="clientCount">0</span>
+            </div>
+            <div class="client-list" id="clientList">
+                <!-- Clients will be populated here -->
+                <div class="client-item">
+                    <span class="client-ip">Waiting for connections...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Interface -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <h3>
+                    <i>🔴</i>
+                    OPERATIONS CHANNEL
+                </h3>
+                <div class="connection-info">
+                    SERVER: <span id="serverIP">127.0.0.1:4444</span>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will appear here -->
+                <div class="message system">
+                    <div class="message-header">
+                        <span class="message-time">00:00:00</span>
+                        <span class="message-sender">SYSTEM</span>
+                    </div>
+                    <div class="message-content">
+                        [*] RedTeam Chat server initialized. Waiting for connections...
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" id="messageInput" placeholder="> ENCRYPTED MESSAGE" disabled>
+                <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled>SEND</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./static/js/script.js"></script>
+</body>
+</html>
